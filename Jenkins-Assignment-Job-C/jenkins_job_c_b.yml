@@ -1,0 +1,8 @@
+---
+- name: Pushing the .jar file to S3 Bucket
+  hosts: localhost
+
+  tasks:
+  - name: Running the aws s3 command
+    ansible.builtin.command:
+      cmd: aws s3 cp /var/lib/jenkins/workspace/jenkins-job-B/target/my-maven-project-1.0-SNAPSHOT.jar s3://bucket-ansible/Assignment/
