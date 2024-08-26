@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Jobs A and B in Parallel') {
+            parallel {
+                stage('Run Job A') {
+                    steps {
+                        build job: 'jenkins-job-A'
+                    }
+                }
+                stage('Run Job B') {
+                    steps {
+                        build job: 'jenkins-job-B'
+                    }
+                }
+            }
+        }
+        stage('Run Job C') {
+            steps {
+                build job: 'jenkins-job-C-b'
+            }
+        }
+    }
+}
