@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+
+    post {
+        success {
+            slackSend (
+                channel: '#jenkins-build-status', 
+                color: 'good', 
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' succeeded. Check console output at ${env.BUILD_URL}"
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#jenkins-build-status', 
+                color: 'danger', 
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed. Check console output at ${env.BUILD_URL}"
+            )
+        }
+    }
+}
