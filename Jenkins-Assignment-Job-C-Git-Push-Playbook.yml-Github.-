@@ -1,0 +1,16 @@
+---
+- name: Playbook for Pushing a file to Github
+  hosts: localhost
+
+  tasks:
+  - name: Adding the File
+    ansible.builtin.command:
+      cmd: git add demoFileAfterError.txt
+
+  - name: Making the Commit
+    ansible.builtin.command:
+      cmd: git commit -m "Added the file after resolving the ansible-vault error"
+
+  - name: Pushing the file to Github Repository
+    ansible.builtin.command:
+      cmd: git push origin main
